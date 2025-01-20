@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전체 문서 및 Iframe 검색 및 하이라이트</title>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+        function highlightInDocumentAndIframe() {
+            var searchText = document.getElementById("searchInput").value;
+        
+            // 부모 문서에서 검색 및 하이라이트
+            removeHighlights(document.body);
+            highlightText(document.body, searchText);
+        
+            // iframe 문서에서 검색 및 하이라이트
+            var iframe = document.getElementById("myIframe");
+            var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            removeHighlights(iframeDoc.body);
+            highlightText(iframeDoc.body, searchText);
+        }
+        
+        function highlightText(element, searchText) {
+            if (!searchText) return;
+        
+            function walk(node) {
+                var child, next;
+        
+                switch (node.nodeType) {
+                    case 1:  // Element
+                    case 9:  // Document
+                    case 11: // DocumentFragment
+                        child = node.firstChild;
+                        while (child) {
+                            next = child.nextSibling;
+                            walk(child);
+                            child = next;
+                        }
+                        break;
+        
+                    case 3: // Text node
+                        var val = node.nodeValue;
+                        var searchTextLower = searchText.toLowerCase();
+                        var valLower = val.toLowerCase();
+                        var idx = valLower.indexOf(searchTextLower);
+                        
+                        if (idx !== -1) {
+                            var span = document.createElement("mark");
+                            var matchedText = node.splitText(idx);
+                            matchedText.splitText(searchText.length);
+                            var clone = matchedText.cloneNode(true);
+                            span.appendChild(clone);
+                            matchedText.parentNode.replaceChild(span, matchedText);
+                            
+                            // 하이라이트된 이후의 텍스트 노드에서도 계속 검색
+                            walk(node.nextSibling);
+                        }
+                        break;
+                }
+            }
+        
+            walk(element);
+        }
+        
+        function removeHighlights(element) {
+            var marks = element.querySelectorAll('mark');
+            marks.forEach(function(mark) {
+                var parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize(); // 텍스트 노드 병합
+            });
+        }
+        </script>
+</head>
+<body>
+
+<iframe id="myIframe" src="../file/test1.txt" width="600" height="400"></iframe>
+
+<input type="text" id="searchInput" placeholder="검색어 입력">
+<button onclick="highlightInDocumentAndIframe()">검색 및 하이라이트</button>
+
+
+
+</body>
+</html>

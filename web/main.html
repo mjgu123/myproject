@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사내규정</title>
+    
+    <link href="css/reset.css" type="text/css" rel="stylesheet">
+    <link href="css/main.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
+    
+    
+
+    <script>
+        
+        function open_in_frame(url) {
+	          $('.main_wrap iframe').attr('src', url);
+             }
+
+             $(document).ready(function(){
+
+            let ww = $(window).width();
+            let wh = $(window).height();
+
+                $('.main_wrap iframe').css({
+                    width: ww,
+                    height : wh,
+                    marginLeft : 330,
+                });
+
+
+
+
+
+
+
+
+
+
+            
+             });//end
+
+
+        
+    </script>
+
+</head>
+<body>
+    <header>
+            <div class="logo"></div>
+    </header>
+
+    <section class="menu">
+        <div class="search">화면내검색</div>
+
+            <!-- <input type="text" id="txtSearch" placeholder="검색어 입력">
+            <button onclick="highlightInIframe()" id="btnSearch" style="cursor: pointer;">검색</button> -->
+
+    </section>
+
+    <section class="select">
+
+        <div class="list_wrap">
+            <ul class="list">
+                <input type="checkbox" id="list_plus">
+                <label for="list_plus"  id="list_label">
+                    <div class="plusimg"></div>
+                </label>
+                test1
+                <li class="list_01"> <button onclick='open_in_frame("file/PHB_M_08.AboutUS_ParadiseWay 국문.jpg")'>test11</button></li>
+                <li class="list_01"> <button onclick='open_in_frame("file/PHB_W_08.AboutUS_Paradiseway 중문.jpg")'>test22</button></li>
+                <li class="list_01"> <button onclick='open_in_frame("file/test1.txt")'>test33</button></li>
+            </ul>
+            <ul class="list">
+                <input type="checkbox" id="list_plus2">
+                <label for="list_plus2"  id="list_label2">
+                    <div class="plusimg"></div>
+                </label>
+                test2
+                <li class="list_02"><button onclick='open_in_frame("file/test2.jpg")'>test11</button></li>
+                <li class="list_02"> <button onclick='open_in_frame("file/PHB_W_08.AboutUS_Paradiseway 중문.jpg")'>test22</button></li>
+                <li class="list_02"> <button onclick='open_in_frame("file/test2.txt")'>test33</button></li>
+            </ul>
+        </div>
+
+
+    </section>
+    <section class="line"></section>       
+
+    <section class="main_wrap"> 
+
+
+    </section>
+
+
+
+
+</body>
+</html>
+
+
+
+
+ 
+

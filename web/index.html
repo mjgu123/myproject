@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>eveningHighlightSearch - Using JavaScript to Search For and Highlight Text on a Web Page</title>
+    <style>
+    .matched1 {
+        color: #eee;
+        background-color: #39f;
+    }
+    .matched2 {
+        color: #300;
+        background-color: #cdf;
+    }
+    .matched3 {
+        color: #000;
+        background-color: #ccc;
+    }
+    .matched4 {
+        color: #444;
+        background-color: #96e;
+    }
+    .matched {}
+    </style>
+    <script>
+        var findWord;
+        var originSource;
+        
+        function saveOriginSource(){
+            originSource = document.body.innerHTML;
+        }
+            
+        function startSearch(){
+            if(document.getElementById("findKey").value && document.getElementById("findKey").value.length > 1){
+                resetSearch();
+                findWord = document.getElementById("findKey").value;
+                repeater(document.body);
+            }
+        }
+        function keyEvent(e){
+            if(e.keyCode == 13) startSearch();
+        }
+        function repeater(ele){
+            analyzeElement(ele);
+            
+            var cloneArray = [];
+            if(ele.childNodes.length > 0){
+                for(var i= 0 ; i < ele.childNodes.length; i++){
+                    cloneArray.push(ele.childNodes[i]);
+                }
+                for(var i= 0 ; i < cloneArray.length; i++){
+                    repeater(cloneArray[i]);
+                }
+            }
+        }
+        function analyzeElement(ele){
+            if(ele.nodeType == 3){
+                if (ele.parentNode){
+                    var highlightElement = document.createElement("span");
+                    highlightElement.setAttribute("class", "matched");
+                    
+                    var matchedValue = matchLevel_1(ele.textContent, findWord, "matched1");
+                    if(matchedValue){
+                        highlightElement.innerHTML = matchedValue;
+                    
+                        ele.parentNode.insertBefore(highlightElement, ele);
+                        ele.parentNode.removeChild(ele);
+                    }else{
+                        matchedValue = matchLevel_2(ele.textContent, findWord, "matched2");
+                        if(matchedValue){
+                            highlightElement.innerHTML = matchedValue;
+                        
+                            ele.parentNode.insertBefore(highlightElement, ele);
+                            ele.parentNode.removeChild(ele);
+                        }else{
+                            matchedValue = matchLevel_3(ele.textContent, findWord, "matched3");
+                            if(matchedValue){
+                                highlightElement.innerHTML = matchedValue;
+                            
+                                ele.parentNode.insertBefore(highlightElement, ele);
+                                ele.parentNode.removeChild(ele);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ////////////////////////////////////////////////Match Logic Level - START////////////////////////////////////////////
+        function matchLevel_1(sourceText, searchText, styleName){
+            var css = styleName;
+            var newSource = false;
+            function attachEffect(matched){
+                return "<span class='" + css + "'>" + matched + "</span>";
+            }
+            searchText = preFilter(searchText);
+            searchText = new RegExp(searchText, "g");// Valid [Web Page], invalid [web page] : This is a Web Page for ...
+            if(searchText.test(sourceText))
+                newSource = sourceText.replace(searchText, attachEffect);
+            return newSource;
+        }
+        function matchLevel_2(sourceText, searchText, styleName){
+            var css = styleName;
+            var newSource = false;
+            function attachEffect(matched){
+                return "<span class='" + css + "'>" + matched + "</span>";
+            }
+            searchText = preFilter(searchText);
+            searchText = new RegExp(searchText, "gi");// Valid [Web Page][web Page][web page][WEb PaGe] etc : This is a Web Page for ...
+            if(searchText.test(sourceText))
+                newSource = sourceText.replace(searchText, attachEffect);
+            return newSource;
+        }
+        function matchLevel_3(sourceText, searchText, styleName){
+            var splitArr = searchText.split(" ");
+            var css = styleName;
+            var newSource = false;
+            var tmpSource = sourceText;
+            for(var i = 0; i < splitArr.length; i++){
+                if(splitArr[i] != "" && splitArr[i].length > 1){
+                    if(matchLevel_3_(tmpSource, splitArr[i], css)){
+                        newSource = matchLevel_3_(tmpSource, splitArr[i], css);
+                        tmpSource = newSource;
+                    }
+                }
+            }
+            return newSource;
+        }
+        function matchLevel_3_(sourceText, searchText, styleName){
+            var css = styleName;
+            var newSource = false;
+            function attachEffect(matched){
+                return "<span class='" + css + "'>" + matched + "</span>";
+            }
+            searchText = preFilter(searchText);
+            searchText = new RegExp(searchText, "gi");// Valid [Web Page][web Page][web page][WEb PaGe] etc : This is a Web Page for ...
+            if(searchText.test(sourceText))
+                newSource = sourceText.replace(searchText, attachEffect);
+            return newSource;
+        }
+        function attachEffect(matched, effectCSS){
+            return "<span class=" + effectCSS + ">" + matched + "</span>";
+        }
+        function preFilter(txt){
+            //return txt.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+            return txt.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        }
+        ////////////////////////////////////////////////Match Logic Level - END////////////////////////////////////////////
+        
+        /*
+         * Reset Logic - START
+         */
+        function resetSearch(){       
+            repeatResetFunction(document.body);
+        }
+        function repeatResetFunction(ele){
+            analyzeResetElement(ele);
+            
+            var cloneArray = [];
+            if(ele.childNodes.length > 0){
+                for(var i= 0 ; i < ele.childNodes.length; i++){
+                    //cloneArray.push(ele.childNodes[i]);
+                    repeatResetFunction(ele.childNodes[i]);
+                }
+                /*
+                for(var i= 0 ; i < cloneArray.length; i++){
+                    repeatResetFunction(cloneArray[i]);
+                }
+                */
+            }
+        }
+        function analyzeResetElement(ele){
+            if(ele.nodeType == 1 && ele.nodeName.toLowerCase() == "span"){
+                if(ele.getAttribute("class")){
+                    if(ele.getAttribute("class") == "matched" && ele.hasChildNodes()){
+                        replaceResetElement(ele);
+                    }
+                }
+            }
+        }
+        function replaceResetElement(ele){
+            var sourceTxt = ele.textContent;
+            var parent = ele.parentNode;
+            var newTxtNode = document.createTextNode(sourceTxt);
+            
+            parent.insertBefore(newTxtNode, ele);
+            parent.removeChild(ele);
+        }
+    </script>
+</head>
+
+<body onload="saveOriginSource()">
+    <a href="mailto:splitedragon" style="position:absolute;right:10px;width:280px;height:80px;cursor:pointer;top:0px;">Email: splitedragon@hotmail.com</a>
+    <input type="txt" id="findKey" onkeypress="keyEvent(event)">
+    <input type="button" value="검색" onclick="startSearch()">
+    <input type="button" value="X" onclick="document.getElementById('findKey').value='';resetSearch()">
+    <input type="button" value="원상복귀" onclick="document.body.innerHTML = originSource;">
+    <div>
+
+    <p><span>
+        <h3>하이라이트 검색기능</h3>
+    </span></p>
+    </div>
+    
+    <p id="ppp"></p>
+    <div id="dddd">
+    <ul class="level-1">
+      <li class="item-i">Node.textContent 의 값을 가지고 검색</li>
+      <li class="item-ii">지원하는 웹브라우저: IE9,10/FF/Chrome/Opera/Safari(Win,MAC,iOS)
+      <li class="item-ii">검색은 ie, sp, high와 같이 검색글자길이가 2이상부터 가능</li>
+      <li class="item-iii">
+        검색은 대소문자구별에 따라 완전일치, 대소문자구분없이 검색, 여러개의 단어결합검색 등으로 진행, 검색글자 Web Page에 관하여"
+        <ul class="level-1">
+            <li class="item-i"><h4>[검색-1] 완전일치</h4>
+            <p>검색된 글자의 배경색 : <span style="background-color: #39f;color:#eee;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+            검색성공 : [Web Page]<br>검색 실패 [web page][wEB Page]</p>
+            </li>
+            <li class="item-i"><h4>[검색-2] 대소문자구분없음</h4>
+            <p>검색된 글자의 배경색 : <span style="background-color: #cdf;color:#300;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+            검색성공 : [Web Page][web page][wEb pAGe] 등<br>검색실패: [web javascript][JavaScript highlight]</p>
+            </li>
+            <li class="item-i"><h4>[검색-3] 여러개 검색단어에 의한 검색</h4>
+            <p>검색된 글자의 배경색 : <span style="background-color: #ccc;color:#000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+            Possible : [web javascript][JavaScript highlight IE]</p>
+            </li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+    <hr>
+    <center>Contact to me <a href='mailto:splitedragon@hotmail.com'>splitedragon@hotmail.com</a>        
+    <br>
+    Skype: splitedragon
+    <br>
+    website: 
+    http://goodhow.com:8096/</center>
+</body>
+</html>

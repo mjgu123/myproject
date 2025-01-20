@@ -1,0 +1,2 @@
+<a href="javascript:;" id="bdySaveBtn" onclick="bdySavePrint(0, this ,0, '');return false;" title="저장"> <img src="/LSW/images/common/btn_v13fn6.png" alt="저장" /> </a>
+<a href=\"javascript:;\" onclick=\"window.bdySearch(document.getElementsByName('srcBtn'));return false;\"> 

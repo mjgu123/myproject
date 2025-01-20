@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe 검색 및 하이라이트 예제</title>
+</head>
+<body>
+
+<iframe id="myIframe" src="../file/test1.txt" width="600" height="400"></iframe>
+
+<input type="text" id="searchInput" placeholder="검색어 입력">
+<button onclick="highlightInIframe()">검색 및 하이라이트</button>
+
+<script>
+function highlightInIframe() {
+    var iframe = document.getElementById("myIframe");
+    var searchText = document.getElementById("searchInput").value;
+    
+    // iframe의 document 객체에 접근
+    var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+    // iframe 내의 body 요소를 가져옴
+    var bodyElement = iframeDoc.body;
+
+    // 기존의 하이라이트 제거
+    removeHighlights(iframeDoc);
+
+    // 검색어가 비어 있으면 종료
+    if (!searchText) return;
+
+    // 검색된 텍스트를 하이라이트
+    highlightText(bodyElement, searchText, iframeDoc);
+}
+
+function highlightText(element, searchText, doc) {
+    var innerHTML = element.innerHTML;
+    var regex = new RegExp(`(${searchText})`, 'gi');
+    
+    // 검색어에 해당하는 부분을 <mark> 태그로 감쌈
+    innerHTML = innerHTML.replace(regex, '<mark>$1</mark>');
+    element.innerHTML = innerHTML;
+}
+
+function removeHighlights(doc) {
+    // 기존의 모든 <mark> 태그를 제거하여 하이라이트를 초기화
+    var marks = doc.querySelectorAll('mark');
+    marks.forEach(function(mark) {
+        var parent = mark.parentNode;
+        parent.replaceChild(doc.createTextNode(mark.textContent), mark);
+        parent.normalize(); // 텍스트 노드가 병합되도록 normalize
+    });
+}
+</script>
+
+</body>
+</html>
