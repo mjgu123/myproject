@@ -1,0 +1,85 @@
+.menu{
+    position: relative;
+    float: left;
+    position: relative;
+}
+
+
+
+.main_menu{
+    width: 200px;
+    height: 100%;
+    background-color: black;
+    /* position: fixed; */
+    float: left;
+    position: fixed;
+/*     display: none; */
+}
+
+.main_menu2{
+    width: 240px;
+    height: 100%;
+    background-color: transparent;
+    /* position: fixed; */
+    float: left;
+    position: fixed;
+    display: none;
+}
+.main_menu22{
+    width: 200px;
+    height: 100%;
+    background-color: black;
+    /* position: fixed; */
+    float: left;
+    position: fixed;
+}
+
+.logo{
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    cursor: pointer;
+}
+.small_menu{
+    width: 90px;
+    height: 100%;
+    background-color: black;
+    /* position: fixed; */
+   /*  float: left; */
+    position: fixed;
+    display: none;
+}
+
+.menu_bar{
+    padding: 33px;
+    position: absolute;
+}
+
+
+.main_list{
+    width: 90px;
+    color: #ffffff;
+    /* padding: 80px 0; */
+    position: absolute;
+    top: 200px;
+    left: 55px;
+    /* background-color: aqua; */
+}
+
+.main_list li{
+
+    color: #ffffff;
+    padding: 0px 0px 50px 0px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    /* background-color: beige; */
+}
+
+
+
+
+
+
+
+
