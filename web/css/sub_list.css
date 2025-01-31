@@ -1,5 +1,5 @@
 .sub_menu{
-    width: 600px;
+    width: 400px;
     height: 100%;
     background-color: gray;
     position: fixed;
@@ -12,16 +12,18 @@
     height: 100%;
     background-color: transparent;
     position: absolute;
-    top: 150px;    
+    top: 195px;    
     cursor: pointer;
+    margin-left: 50px;
 }
 .sub_list2{
     width: 100%;
     height: 100%;
     background-color: transparent;
     position: absolute;
-    top: 215px;    
+    top: 265px;    
     cursor: pointer;
+    margin-left: 50px;
 }
 
 .sub_list3{
@@ -29,8 +31,9 @@
     height: 100%;
     background-color: transparent;
     position: absolute;
-    top: 285px;    
+    top: 330px;    
     cursor: pointer;
+    margin-left: 50px;
 }
 
 .sub_list4{
@@ -38,8 +41,9 @@
     height: 100%;
     background-color: transparent;
     position: absolute;
-    top: 355px;    
+    top: 400px;    
     cursor: pointer;
+    margin-left: 50px;
 }
 
 .sub_list5{
@@ -47,8 +51,9 @@
     height: 100%;
     background-color: transparent;
     position: absolute;
-    top: 425px;    
+    top: 470px;    
     cursor: pointer;
+    margin-left: 50px;
 }
 
 .sub_list6{
@@ -56,61 +61,64 @@
     height: 100%;
     background-color: transparent;
     position: absolute;
-    top: 495px;    
+    top: 540px;    
     cursor: pointer;
+    margin-left: 50px;
+
 }
 
 .sub_list1 li{
     color: #fff;
-    float: left;
-    text-align: center;
+/*     float: left; */
     font-size: 14px;
-    padding: 50px 0 0 60px;
+/*     padding: 10px 0 0 60px; */
     display: none;
+    margin-bottom: 10px;
 }
 
 .sub_list2 li{
     color: #fff;
-    float: left;
-    text-align: center;
+/*     float: left; */
     font-size: 14px;
-    padding: 50px 0 0 60px;
+/*     padding: 10px 0 0 60px; */
     display: none;
+    margin-bottom: 10px;
 }
 
 .sub_list3 li{
     color: #fff;
-    float: left;
-    text-align: center;
+/*     float: left; */
     font-size: 14px;
-    padding: 50px 0 0 60px;
+/*     padding: 10px 0 0 60px; */
     display: none;
+    margin-bottom: 10px;
 }
 
 .sub_list4 li{
     color: #fff;
-    float: left;
-    text-align: center;
+/*     float: left; */
     font-size: 14px;
-    padding: 50px 0 0 60px;
+/*     padding: 10px 0 0 60px; */
     display: none;
+    margin-bottom: 10px;
 }
 
 .sub_list5 li{
     color: #fff;
-    float: left;
-    text-align: center;
+/*     float: left; */
+/*     text-align: center; */
     font-size: 14px;
-    padding: 50px 0 0 60px;
+/*     padding: 10px 0 0 60px; */
     display: none;
+    margin-bottom: 10px;
 }
 
 .sub_list6 li{
     color: #fff;
-    float: left;
-    text-align: center;
+/*     float: left; */
     font-size: 14px;
-    padding: 50px 0 0 60px;
+/*     padding: 10px 0 0 60px; */
     display: none;
+    margin-bottom: 10px;
 }
 
