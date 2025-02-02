@@ -1,6 +1,6 @@
 .sub2_Alist1_pdf{
-    margin-left: 200px;
-    width: calc(100vw - 200px);
+    margin-left: 90px;
+    width: calc(100vw - 90px);
     height: 100vh;
-/*     display: none; */
+    display: none;
 }

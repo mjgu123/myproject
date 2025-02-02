@@ -21,7 +21,7 @@
     cursor: pointer;
     position: absolute;
     top: 195px;   
-/*     display: none; */
+    display: none;
 }
 
 .sub2_Alist1 li, .sub2_Alist2 li, 
@@ -38,7 +38,7 @@
     text-align: left; 
     font-size: 13px;
     padding: 0 0 8px 30px;
-/*     display: none; */
+    /* display: none; */
 }    
 
 
@@ -74,7 +74,7 @@
     text-align: left;
     font-size: 13px;
     padding: 0 0 8px 30px;
-    display: none;
+/*     display: none; */
 }
 
 .sub2_Clist1, .sub2_Clist2, 
@@ -106,7 +106,7 @@
     text-align: left;
     font-size: 13px;
     padding: 0 0 8px 30px;
-    display: none;
+/*     display: none; */
 }
 
 .sub2_Dlist1, .sub2_Dlist2, 
@@ -130,7 +130,7 @@
     text-align: left;
     font-size: 13px;
     padding: 0 0 8px 30px;
-    display: none;
+/*     display: none; */
 }
 
 .sub2_Elist1, .sub2_Elist2, 
@@ -152,7 +152,7 @@
     text-align: left;
     font-size: 13px;
     padding: 0 0 8px 30px;
-    display: none;
+/*     display: none; */
 }
 
 .sub2_Flist1, .sub2_Flist2{
@@ -170,5 +170,5 @@
     text-align: left;
     font-size: 13px;
     padding: 0 0 8px 30px;
-    display: none;
+/*     display: none; */
 }

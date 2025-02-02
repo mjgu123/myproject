@@ -1,14 +1,17 @@
 .search_btn{
     cursor: pointer;
     position: absolute;
-    margin : 700px 90px 0 90px;
+    /* margin : 700px 90px 0 90px; */
+    bottom:200px;
+    left: 93px;
 
 }
 
 .search_btn_bar{
     cursor: pointer;
     position: absolute;
-    padding: 700px 0px 0px 35px;
+    bottom:200px;
+    left: 39px;
 }
 
 .close_btn{
@@ -27,5 +30,12 @@
 .main2_close_btn{
     cursor: pointer;
     position: absolute;
-    padding:20px 0 0 220px;
+    right: 60px;
+    top: 20px;
+}
+
+.menu_bar{
+    cursor: pointer;
+    padding: 33px;
+    position: absolute;
 }
